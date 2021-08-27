@@ -3,17 +3,7 @@ require 'capybara/dsl'
 require 'telegram/bot'
 
 require_relative './credentials'
-
-class Stake_info
-  attr_reader :time_in_minutes, :pairname, :stake_sum, :will_go_higher
-
-  def initialize(time_in_minutes:, pairname:, stake_sum:, will_go_higher:)
-    @time_in_minutes = time_in_minutes
-    @pairname = pairname
-    @stake_sum = stake_sum
-    @will_go_higher = will_go_higher
-  end
-end
+require_relative 'stake_info'
 
 class Inbar_class
   include Capybara::DSL
@@ -42,7 +32,6 @@ class Inbar_class
     choose_sprint
 
     # Set stake settings
-    puts "stake_info = #{stake_info.inspect}"
     set_time(stake_info.time_in_minutes)
     set_pare(stake_info.pairname)
     set_sum(stake_info.stake_sum)
@@ -103,15 +92,23 @@ class Inbar_class
 
   def set_time(_expire_time_in_minutes)
     puts 'Выставляю время (классик изначально здесь)'
-    fill_in 'timepicker', with: ''
-    fill_in 'timepicker', with: _expire_time_in_minutes
+    fill_in 'time2', with: ''
+    fill_in 'time2', with: _expire_time_in_minutes
   end
 
   def set_pare(_pairname)
     puts 'Нахожу и заполняю пару'
-    dropdown_select = page.find(:xpath, '//*[@id="select_option"]/div[1]/input')
+    dropdown_select = page.find(:xpath, '//*[@id="select_option"]/div[2]/input')
     dropdown_select.click
-    send_keys(_pairname)
+    # Writing down pairname on keyboard. Doesn't work good because of
+    # not correct for this search logic on site
+    # send_keys(_pairname)
+    #
+    # So just clicking on required stake
+    # (hardcoded for now)
+    # TODO: Убрать хардкодинг здесь и добавить проверку, необходимо
+    #  ли инверсирование (так как нет условно JPY/USD, а есть только USD/JPY)
+    find('span', text: 'GBP/NZD').click
     send_keys(:enter)
   end
 

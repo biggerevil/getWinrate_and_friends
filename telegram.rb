@@ -1,15 +1,17 @@
 require 'telegram/bot'
 
 require_relative 'credentials'
+require_relative 'stake_info'
 
-def send_screen_in_telegram
+def send_result_info_in_telegram(stake_info)
   Telegram::Bot::Client.run(ENV['telegram_token']) do |bot|
-    bot.api.send_message(chat_id: ENV['chat_id'], text: "Get this!")
-    bot.api.send_photo(chat_id: ENV['chat_id'], photo: Faraday::UploadIO.new('./screen.png', 'image/jpeg'))
+    bot.api.send_message(chat_id: ENV['chat_id'], text: "I was required to make such stake:\n #{stake_info.print_version}\n\n  Current time: #{Time.now}")
+    # bot.api.send_photo(chat_id: ENV['chat_id'], photo: Faraday::UploadIO.new('./screen.png', 'image/jpeg'))
   end
 end
 
 # Example code for listening and answering to /start and /stop
+#
 #
 # Telegram::Bot::Client.run(token) do |bot|
 #   bot.listen do |message|
