@@ -4,6 +4,17 @@ require 'telegram/bot'
 
 require_relative './credentials'
 
+class Stake_info
+  attr_reader :time_in_minutes, :pairname, :stake_sum, :will_go_higher
+
+  def initialize(time_in_minutes:, pairname:, stake_sum:, will_go_higher:)
+    @time_in_minutes = time_in_minutes
+    @pairname = pairname
+    @stake_sum = stake_sum
+    @will_go_higher = will_go_higher
+  end
+end
+
 class Inbar_class
   include Capybara::DSL
 
@@ -16,7 +27,7 @@ class Inbar_class
   Capybara.app_host = 'https://inbar.pro'
 
   # Function to make stake
-  def make_stake
+  def make_stake(stake_info)
     # Opening platform
     login_into_inbar
     choose_demo_trade
@@ -31,12 +42,17 @@ class Inbar_class
     choose_sprint
 
     # Set stake settings
-    set_time
-    set_pare
-    set_sum
+    puts "stake_info = #{stake_info.inspect}"
+    set_time(stake_info.time_in_minutes)
+    set_pare(stake_info.pairname)
+    set_sum(stake_info.stake_sum)
 
     # Make stake
-    click_on_call
+    if stake_info.will_go_higher
+      click_on_call
+    else
+      click_on_put
+    end
   end
 
 
@@ -85,27 +101,31 @@ class Inbar_class
     end
   end
 
-  def set_time
+  def set_time(_expire_time_in_minutes)
     puts 'Выставляю время (классик изначально здесь)'
     fill_in 'timepicker', with: ''
-    fill_in 'timepicker', with: '10:00'
+    fill_in 'timepicker', with: _expire_time_in_minutes
   end
 
-  def set_pare
+  def set_pare(_pairname)
     puts 'Нахожу и заполняю пару'
     dropdown_select = page.find(:xpath, '//*[@id="select_option"]/div[1]/input')
     dropdown_select.click
-    send_keys('NZD/USD')
+    send_keys(_pairname)
     send_keys(:enter)
   end
 
-  def set_sum
+  def set_sum(_stake_sum)
     puts 'Выставляю сумму'
-    fill_in 'investment', with: '523'
+    fill_in 'investment', with: _stake_sum
   end
 
   def click_on_call
     find("img[alt='call']").click
+  end
+
+  def click_on_put
+    find("img[alt='put']").click
   end
 
   # TODO: запуск на сервере
