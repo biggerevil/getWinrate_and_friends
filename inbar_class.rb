@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'capybara'
 require 'capybara/dsl'
 require 'telegram/bot'
@@ -44,7 +46,6 @@ class Inbar_class
     end
   end
 
-
   private
 
   def login_into_inbar
@@ -85,7 +86,7 @@ class Inbar_class
     # Within menu with 'Классик' and 'Спринт'
     within find('ul.header_menu') do
       # Choose 'Спринт' and click
-      xpath_element = find(:xpath, "li[2]")
+      xpath_element = find(:xpath, 'li[2]')
       xpath_element.click
     end
   end

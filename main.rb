@@ -1,10 +1,9 @@
 # frozen_string_literal: true
 
 require_relative 'credentials'
-require_relative 'telegram.rb'
-require_relative 'inbar_class.rb'
+require_relative 'telegram'
+require_relative 'inbar_class'
 require_relative 'stake_info'
-
 
 puts 'Начинаю'
 
@@ -22,7 +21,6 @@ stake_info = Stake_info.new(
   pairname: 'GBP/NZD',
   stake_sum: 100,
   will_go_higher: true
-
 )
 class_for_w = Inbar_class.new
 class_for_w.make_stake(stake_info)
