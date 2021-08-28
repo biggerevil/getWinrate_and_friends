@@ -13,13 +13,16 @@ class Inbar_class
   # Settings for capybara
   Capybara.run_server = false
   # Use usual browser
-  Capybara.current_driver = :selenium
+  # Capybara.current_driver = :selenium
   # Use headless browser
-  # Capybara.current_driver = :selenium_headless
+  Capybara.current_driver = :selenium_headless
   Capybara.app_host = 'https://inbar.pro'
 
   # Function to make stake
   def make_stake(stake_info)
+    # Making class variable for easier work
+    @stake_info = stake_info
+
     # Opening platform
     login_into_inbar
     choose_demo_trade
@@ -99,6 +102,14 @@ class Inbar_class
 
   def set_pare(_pairname)
     puts 'Нахожу и заполняю пару'
+
+    puts 'Пытаюсь определить пару'
+    if should_invert(_pairname)
+      puts "Нашёл inverted! Это #{@inverted_pairname}"
+      @stake_info.change_pairname_to(@inverted_pairname)
+      @stake_info.invert_direction
+    end
+
     dropdown_select = page.find(:xpath, '//*[@id="select_option"]/div[2]/input')
     dropdown_select.click
     # Writing down pairname on keyboard. Doesn't work good because of
@@ -151,4 +162,23 @@ class Inbar_class
   # отлично работать для intrade.bar, хотя вообще можно замутить двух ботов, один из которых будет
   # продолжать как обычно, а второй работать конкретно на intrade.bar)
   # Но это мб всё потом
+
+  ALL_PAIRNAMES = %w[AUD/CAD AUD/CHF AUD/JPY AUD/NZD AUD/USD CAD/JPY EUR/AUD EUR/CAD EUR/CHF EUR/GBP EUR/JPY EUR/USD
+                     GBP/AUD GBP/CHF GBP/JPY GBP/NZD NZD/JPY NZD/USD USD/CAD USD/CHF USD/JPY].freeze
+
+  def should_invert(_pairname)
+    first_currency = _pairname[0..2]
+    second_currency = _pairname[4..6]
+
+    ALL_PAIRNAMES.each do |pairname_from_each|
+      if pairname_from_each[0..2] == first_currency and pairname_from_each[4..6] == second_currency
+        return false
+      elsif pairname_from_each[4..6] == first_currency and pairname_from_each[0..2] == second_currency
+        @inverted_pairname = pairname_from_each
+        return true
+      end
+    end
+
+    raise "Couldn't understand what pairname you want to.\n You wanted #{_pairname} and I have only:\n#{ALL_PAIRNAMES}"
+  end
 end

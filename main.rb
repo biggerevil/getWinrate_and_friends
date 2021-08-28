@@ -18,7 +18,7 @@ puts 'Начинаю'
 #
 stake_info = Stake_info.new(
   time_in_minutes: 10,
-  pairname: 'GBP/NZD',
+  pairname: 'NZD/GBP',
   stake_sum: 100,
   will_go_higher: true
 )
