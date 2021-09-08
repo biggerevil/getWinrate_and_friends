@@ -1,4 +1,10 @@
-from get_percentage import *
-from tg_bot import *
+# -*- coding: utf-8 -*-
 
-start_bot()
+import get_percentage
+import tg_bot
+
+# print("Запускаю бота")
+# start_bot()
+
+print("Вывожу статистику")
+get_percentage.print_stats()
