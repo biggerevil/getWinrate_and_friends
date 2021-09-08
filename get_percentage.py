@@ -93,43 +93,4 @@ def print_stats():
 
     print_pairs_with_certain(cur, pairs, timeframes_i_wanna_know, certain_values_i_wanna_know)
 
-    # print("Начинаю итерацию по парам")
-    # for pair in pairs:
-    #     print("\n")
-    #     print("pair =", pair)
-    #
-    #     for timeframe in timeframes_i_wanna_know:
-    #         # print("\n\n New timeframe \n\n")
-    #         # print(f"pair = {pair}, timeframe = {timeframe}")
-    #         result_from_function = query_variants.value_good_for_pair_and_timeframe(cur, pair, timeframe)
-    #         # print(f"result_from_function is = {result_from_function}")
-    #         # if result_from_function is None:
-    #         #     print("result_from_function is None")
-    #         good_value_result = result_from_function
-    #
-    #         if good_value_result.should_make_attention:
-    #             good_value = good_value_result
-    #             # print(f"Found good_value! Here it is {good_value}")
-    #             good_values.append(good_value)
-    #
-    #         for certain_value in certain_values_i_wanna_know:
-    #             good_value_result = query_variants.value_good_for_pair_and_timeframe_and_certain(cur, pair, timeframe, certain_value)
-    #             if good_value_result.should_make_attention:
-    #                 good_value = good_value_result
-    #                 # print(f"Found good_value! Here it is {good_value}")
-    #                 good_values.append(good_value)
-
-    # print("\n\n\n")
-    #
-    # print("\t\t Good values: \n")
-
-    # text_for_return = ""
-
-    # Добавляю даты первой и последней даты в БД
-    # Обрати внимание на `, их в следующей строке как минимум было ЧЕТЫРЕ
-    # text_for_return += "`earliest date: " + earliest_date + "`\n" + "`latest date  : " + latest_date + "`\n\n\n"
-
-    # print(f"good_values before print_good_values = {good_values}")
-    # utility_code.print_good_values(good_values)
-
     print("\n Done!")
