@@ -1,4 +1,5 @@
 import collections
+import constants
 
 
 class ReturnTuple:
@@ -9,7 +10,8 @@ class ReturnTuple:
     pairname = None
     certain = -1
 
-    def __init__(self, should_make_attention, percentage=None, total_value=None, timeframe=None, pairname=None, certain=None):
+    def __init__(self, should_make_attention, percentage=None, total_value=None, timeframe=None, pairname=None,
+                 certain=None):
         self.should_make_attention = should_make_attention
         self.percentage = percentage
         self.total_value = total_value
@@ -42,6 +44,7 @@ class ReturnTuple:
 
         return text_for_return
 
+
 def sort_by_winrate(good_values):
     for i in range(0, len(good_values)):
         for j in range(i + 1, len(good_values)):
@@ -66,14 +69,17 @@ def print_good_values(good_values, minimum_stakes=-1):
         # print(f"\ttimeftame = {value[0]}\t\t percentage = {percentage}   \t\t total count of deals = {value[2]}\t\t\tpair name = {value[3]}")
         # print("timeftame:", value[0], "percentage: ", value[1], "total count of deals: ", value[2], "  \tpair name: ", value[3], sep="\t\t")
 
+
 def print_all_good_values(good_values):
     for value in good_values:
         print(value)
+
 
 def print_good_values_with_at_least_N_stakes(good_values, N):
     for value in good_values:
         if int(value.total_value) >= N:
             print(value)
+
 
 def place_attention(check, up):
     if check:
@@ -95,3 +101,14 @@ def higher_winrate(first_good_value, second_good_value):
         return True
     else:
         return False
+
+
+# Этот метод создан, чтобы избежать дублирования кода
+def print_warning_if_using_round_time(round_time_offset):
+    if round_time_offset != constants.Offset_if_not_using_round_time:
+        print(f"\n\n    Using ROUND time offset = {round_time_offset}\n")
+
+
+# Этот метод создан, чтобы избежать дублирования кода
+def check_if_needs_attention(nice_percentage):
+    return nice_percentage > constants.Minimum_winrate or nice_percentage < (100 - constants.Minimum_winrate)
