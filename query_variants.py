@@ -2,9 +2,10 @@ import get_percentage
 import utility_code
 
 
-def value_good_for_pair_and_timeframe(cur, pairname, timeframe):
+def value_good_for_pair_and_timeframe(cur, pairname, timeframe, round_time=False):
     # Get how many in TOTAL there are stakes (i.e. 500)
-    query_for_total = f'''SELECT COUNT(*) FROM RESULTSSTAVKI WHERE EXPIREPERIOD="{timeframe}" AND PAIRNAME="{pairname}";'''
+    query_for_total = f'''SELECT COUNT(*) FROM RESULTSSTAVKI WHERE EXPIREPERIOD="{timeframe}" AND PAIRNAME="{pairname}"'''
+    query_for_total += ';'
     total_value = cur.execute(query_for_total).fetchone()[0]
 
     # Continue if there are no stakes for this timeframe at all (i.e. 0)
@@ -38,9 +39,10 @@ def value_good_for_pair_and_timeframe(cur, pairname, timeframe):
     else:
         return utility_code.ReturnTuple(should_make_attention=False)
 
-def value_good_for_pair_and_timeframe_and_certain(cur, pairname, timeframe, certain):
+def value_good_for_pair_and_timeframe_and_certain(cur, pairname, timeframe, certain, round_time=False):
     # Get how many in TOTAL there are stakes (i.e. 500)
-    query_for_total = f'''SELECT COUNT(*) FROM RESULTSSTAVKI WHERE EXPIREPERIOD="{timeframe}" AND PAIRNAME="{pairname}" AND CERTAIN="{certain}";'''
+    query_for_total = f'''SELECT COUNT(*) FROM RESULTSSTAVKI WHERE EXPIREPERIOD="{timeframe}" AND PAIRNAME="{pairname}" AND CERTAIN="{certain}"'''
+    query_for_total += ';'
     total_value = cur.execute(query_for_total).fetchone()[0]
 
     # Continue if there are no stakes for this timeframe at all (i.e. 0)
