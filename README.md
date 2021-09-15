@@ -45,7 +45,7 @@ _Если я всё правильно помню:_
 	systemctl enable getWinrate.service
 	systemctl enable getWinrate.timer
 	
-	# Проверяем, что работает. Необязательные команды. Чуть-чуть портят БД, так как getWinrate запускается не в ровное время
+	# Проверяем, что работает. Необязательные команды. Возможно, чуть-чуть портят БД, так как getWinrate запускается не в ровное время
 	systemctl start getWinrate.timer
 	systemctl status getWinrate.timer
 	systemctl status getWinrate.service
