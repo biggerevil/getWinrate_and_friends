@@ -1,0 +1,8 @@
+*.db
+.*
+credentials.py
+/venv/
+/.DS*
+/webhook_cert.pem
+/webhook_pkey.pem
+/__pycache__
