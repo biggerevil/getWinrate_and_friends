@@ -1,0 +1,10 @@
+//
+// Created by c on 09.10.2020.
+//
+
+#ifndef GETWINRATE_BEASTWEBSOCKET_H
+#define GETWINRATE_BEASTWEBSOCKET_H
+
+int makeStakeBeast();
+
+#endif //GETWINRATE_BEASTWEBSOCKET_H
