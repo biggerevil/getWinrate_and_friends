@@ -4,7 +4,7 @@ import get_percentage
 import tg_bot
 
 # print("Запускаю бота")
-# start_bot()
+# tg_bot.start_bot()
 
 print("Вывожу статистику")
 get_percentage.print_stats()

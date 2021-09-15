@@ -68,6 +68,7 @@ def start_bot():
             bot.reply_to(message, 'Запрос получил, начинаю работу')
             print("Начинаю обработку запроса")
             answer_text = print_stats()
+            print(f"answer_text = {answer_text}")
             print("Закончил обработку запроса")
             bot.reply_to(message, answer_text)
 

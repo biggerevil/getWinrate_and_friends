@@ -1,7 +1,7 @@
-/credentials.py
-/results.db
+*.db
+.*
+credentials.py
 /venv/
-/.idea
 /.DS*
 /webhook_cert.pem
 /webhook_pkey.pem

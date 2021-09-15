@@ -102,18 +102,18 @@ def print_stats():
     print_earliest_and_latest_dates(cur)
 
     print_pairs_without_certain(cur, pairs, timeframes_i_wanna_know)
-    print_pairs_without_certain(cur, pairs, timeframes_i_wanna_know, round_time_offset=0)
-    print_pairs_without_certain(cur, pairs, timeframes_i_wanna_know, round_time_offset=1)
-    print_pairs_without_certain(cur, pairs, timeframes_i_wanna_know, round_time_offset=2)
-    print_pairs_without_certain(cur, pairs, timeframes_i_wanna_know, round_time_offset=3)
-    print_pairs_without_certain(cur, pairs, timeframes_i_wanna_know, round_time_offset=4)
+    # print_pairs_without_certain(cur, pairs, timeframes_i_wanna_know, round_time_offset=0)
+    # print_pairs_without_certain(cur, pairs, timeframes_i_wanna_know, round_time_offset=1)
+    # print_pairs_without_certain(cur, pairs, timeframes_i_wanna_know, round_time_offset=2)
+    # print_pairs_without_certain(cur, pairs, timeframes_i_wanna_know, round_time_offset=3)
+    # print_pairs_without_certain(cur, pairs, timeframes_i_wanna_know, round_time_offset=4)
 
     print_pairs_with_certain(cur, pairs, timeframes_i_wanna_know, certain_values_i_wanna_know)
-    print_pairs_with_certain(cur, pairs, timeframes_i_wanna_know, certain_values_i_wanna_know, round_time_offset=0)
-    print_pairs_with_certain(cur, pairs, timeframes_i_wanna_know, certain_values_i_wanna_know, round_time_offset=1)
-    print_pairs_with_certain(cur, pairs, timeframes_i_wanna_know, certain_values_i_wanna_know, round_time_offset=2)
-    print_pairs_with_certain(cur, pairs, timeframes_i_wanna_know, certain_values_i_wanna_know, round_time_offset=3)
-    print_pairs_with_certain(cur, pairs, timeframes_i_wanna_know, certain_values_i_wanna_know, round_time_offset=4)
+    # print_pairs_with_certain(cur, pairs, timeframes_i_wanna_know, certain_values_i_wanna_know, round_time_offset=0)
+    # print_pairs_with_certain(cur, pairs, timeframes_i_wanna_know, certain_values_i_wanna_know, round_time_offset=1)
+    # print_pairs_with_certain(cur, pairs, timeframes_i_wanna_know, certain_values_i_wanna_know, round_time_offset=2)
+    # print_pairs_with_certain(cur, pairs, timeframes_i_wanna_know, certain_values_i_wanna_know, round_time_offset=3)
+    # print_pairs_with_certain(cur, pairs, timeframes_i_wanna_know, certain_values_i_wanna_know, round_time_offset=4)
 
 
     print("\n Done!")
