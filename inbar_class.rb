@@ -3,9 +3,13 @@
 require 'capybara'
 require 'capybara/dsl'
 require 'telegram/bot'
+require 'rmagick'
 
 require_relative './credentials'
 require_relative 'stake_info'
+require_relative 'variables'
+
+include Magick
 
 class Inbar_class
   include Capybara::DSL
@@ -37,7 +41,7 @@ class Inbar_class
     choose_sprint
 
     # Set stake settings
-    set_time(stake_info.time_in_minutes)
+    # set_time(stake_info.time_in_minutes)
     set_pare(stake_info.pairname)
     set_sum(stake_info.stake_sum)
 
@@ -47,6 +51,11 @@ class Inbar_class
     else
       click_on_put
     end
+
+    sleep(3)
+
+    make_screen
+    add_current_time_to_screen
   end
 
   private
@@ -137,8 +146,30 @@ class Inbar_class
     find("img[alt='put']").click
   end
 
-  # TODO: запуск на сервере
-  # Настроить запуск на сервере. Сначала просто программы.
+  def make_screen
+    puts 'Делаю скриншот'
+
+    page.save_screenshot(SCREEN_PATH + '.png', full: true)
+  end
+
+  def add_current_time_to_screen
+    puts 'Конвертирую скриншот'
+
+    img = Magick::ImageList.new(SCREEN_PATH + '.png')
+
+    text = Magick::Draw.new
+    message = Time.now.utc.strftime('%m/%d/%Y %H:%M %p') + ' (UTC)'
+
+    img.annotate(text, 0,0,0,0, message) do
+      text.gravity = Magick::CenterGravity # Text positioning
+      text.pointsize = 100 # Font size
+      text.fill = "#1c1c1c" # Font color
+      text.font = "/absolutepath/Font.ttf" # Font file; needs to be absolute
+      img.format = "png"
+    end
+
+    img.write(SCREEN_PATH) # Destination image
+  end
 
   # TODO: связь Ruby и C++
   # Подумать, как связать эту программу на Ruby и мой код на C++

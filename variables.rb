@@ -1,0 +1,1 @@
+SCREEN_PATH = "/tmp/screen.png"

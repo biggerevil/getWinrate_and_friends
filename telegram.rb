@@ -4,12 +4,21 @@ require 'telegram/bot'
 
 require_relative 'credentials'
 require_relative 'stake_info'
+require_relative 'variables'
 
 def send_result_info_in_telegram(stake_info)
   Telegram::Bot::Client.run(ENV['telegram_token']) do |bot|
     bot.api.send_message(chat_id: ENV['chat_id'],
                          text: "I was required to make such stake:\n #{stake_info.print_version}\n\n  Current time: #{Time.now}")
-    # bot.api.send_photo(chat_id: ENV['chat_id'], photo: Faraday::UploadIO.new('./screen.png', 'image/jpeg'))
+    bot.api.send_photo(chat_id: ENV['chat_id'], photo: Faraday::UploadIO.new(SCREEN_PATH, 'image/jpeg'))
+  end
+end
+
+def message_about_mistake_in_tg()
+  Telegram::Bot::Client.run(ENV['telegram_token']) do |bot|
+    bot.api.send_message(chat_id: ENV['chat_id'], text: "Mistake happened")
+    # A divider to help differentiate messages
+    bot.api.send_message(chat_id: ENV['chat_id'], text: "========================================")
   end
 end
 

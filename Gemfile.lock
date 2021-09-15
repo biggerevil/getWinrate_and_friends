@@ -66,6 +66,7 @@ GEM
     rainbow (3.0.0)
     regexp_parser (2.1.1)
     rexml (3.2.5)
+    rmagick (4.2.2)
     rubocop (1.19.1)
       parallel (~> 1.10)
       parser (>= 3.0.0.0)
@@ -83,6 +84,7 @@ GEM
     selenium-webdriver (3.142.7)
       childprocess (>= 0.5, < 4.0)
       rubyzip (>= 1.2.2)
+    slop (4.9.1)
     telegram-bot-ruby (0.16.0)
       dry-inflector
       faraday
@@ -104,8 +106,10 @@ DEPENDENCIES
   capybara
   geckodriver-helper
   launchy
+  rmagick
   rubocop
   selenium-webdriver
+  slop
   telegram-bot-ruby
 
 RUBY VERSION
